@@ -1,0 +1,59 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.navbar {
+    .navbar-brand-img {
+        width: 50px;
+        height: auto;
+        margin-right: 25px;
+    }
+    .navbar-brand {
+        font-weight: bold;
+    }
+}
+
+table.vgt-table {
+    font-family: 'Roboto Condensed', sans-serif !important;
+    font-size: 14px !important;
+    border: 1px 0 1px 0 !important;
+}
+table.vgt-table td {
+    padding: .4em !important;
+}
+table.vgt-table .vgt-left-align.text-center {
+    text-align: center !important;
+}
+table.vgt-table.bordered td, table.vgt-table.bordered th {
+    border: none !important;
+    border-bottom: 1px solid #DCDFE6 !important;
+}
+table.vgt-table.bordered tr:last-child td {
+    border-bottom: none !important;
+}
+
+.modal {
+    .modal-title {
+        font-weight: bold;
+    }
+    label {
+        font-weight: bold;
+    }
+}
+
+.multiselect {
+    .multiselect__content-wrapper {
+        border-color: #ced4da !important;
+    }
+    .multiselect__tags {
+        border-color: #ced4da !important;
+    }
+    .multiselect__tag {
+        margin-bottom: 0 !important;
+    }
+}
