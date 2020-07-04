@@ -101,4 +101,10 @@ class ProductController extends Controller
             $query->orderBy('created_at', 'desc');
         }]);
     }
+
+    public function destroy(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+        $product->delete();
+    }
 }

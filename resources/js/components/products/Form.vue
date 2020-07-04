@@ -2,7 +2,7 @@
     <div class="modal fade" ref="modal" tabindex="-1" role="dialog" aria-labelledby="productsCreateModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div v-if="action" class="modal-content">
-                <div class="modal-header bg-info text-white text-uppercase">
+                <div class="modal-header bg-info text-white">
                     <h5 class="modal-title" id="productsCreateModalLabel">
                         <template v-if="action == 'create'">Agregar Producto</template>
                         <template v-if="action == 'edit'">Editar Producto</template>

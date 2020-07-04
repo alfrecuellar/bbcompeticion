@@ -2,7 +2,7 @@
     <div class="modal fade" ref="modal" tabindex="-1" role="dialog" aria-labelledby="productsCreateModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div v-if="product" class="modal-content">
-                <div class="modal-header bg-info text-white text-uppercase">
+                <div class="modal-header bg-success text-white">
                     <h5 class="modal-title" id="productsCreateModalLabel">Datos del Producto</h5>
                 </div>
                 <div class="modal-body">

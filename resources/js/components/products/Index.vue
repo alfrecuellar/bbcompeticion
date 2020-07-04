@@ -17,7 +17,8 @@
                     <template v-if="props.column.field == 'id'">
                         <btn-group>
                             <btn-action color="success" title="Ver" @click="show(props.row)" icon="magnify"></btn-action>
-                            <btn-action color="success" title="Editar" @click="edit(props.row)" icon="pencil"></btn-action>
+                            <btn-action color="primary" title="Editar" @click="edit(props.row)" icon="pencil"></btn-action>
+                            <btn-action color="danger" title="Eliminar" @click="remove(props.row)" icon="trash-can"></btn-action>
                         </btn-group>
                     </template>
                 </template>
@@ -61,19 +62,8 @@
             },
         },
         mounted: function () {
-            bus.$on('products-stored', (product) => {
-                this.products.push(product);
-            });
-
-            bus.$on('products-updated', (product) => {
-                let index = null;
-                _.each(this.products, (item, i) => {
-                    if(item.id == product.id) {
-                         index = i;
-                    }
-                });
-                this.products.splice(index, 1, product);
-            });
+            this.stored();
+            this.updated();
 
             this.loadTags();
             this.setColumns();
@@ -202,12 +192,51 @@
                         this.loading = false;
                     });
             },
-            edit(product) {
-                bus.$emit('products-edit', product);
+            updateProducts(product, push) {
+                let index = null;
+                _.each(this.products, (item, i) => {
+                    if(item.id == product.id) {
+                         index = i;
+                    }
+                });
+                if (push) {
+                    this.products.splice(index, 1, product);
+                }
+                else {
+                    this.products.splice(index, 1);
+                }
             },
             show(product) {
                 bus.$emit('products-show', product);
-            }
+            },
+            edit(product) {
+                bus.$emit('products-edit', product);
+            },
+            remove(product) {
+                bus.$emit('confirm-show', {
+                    color : 'danger',
+                    title : 'Eliminar Producto',
+                    text : '¿Confirma que quiere eliminar el producto <b>' + product.name + '</b>?',
+                    callback : () => {
+                        axios.delete('/api/product/' + product.id)
+                            .then((response) => {
+                                this.updateProducts(product, false);
+                            }).catch(error => {
+                                console.log(error);
+                            });
+                    }
+                });
+            },
+            updated() {
+                bus.$on('products-updated', (product) => {
+                    this.updateProducts(product, true);
+                });
+            },
+            stored() {
+                bus.$on('products-stored', (product) => {
+                    this.products.push(product);
+                });
+            },
         }
     };
 </script>

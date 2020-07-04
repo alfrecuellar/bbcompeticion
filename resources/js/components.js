@@ -5,6 +5,7 @@ Vue.component('btn-group', require('./components/layout/BtnGroup.vue').default);
 Vue.component('btn-link', require('./components/layout/BtnLink.vue').default);
 Vue.component('card', require('./components/layout/Card.vue').default);
 Vue.component('card-title', require('./components/layout/CardTitle.vue').default);
+Vue.component('confirm', require('./components/layout/Confirm.vue').default);
 Vue.component('container', require('./components/layout/Container.vue').default);
 Vue.component('well', require('./components/layout/Well.vue').default);
 

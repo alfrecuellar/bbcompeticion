@@ -38,11 +38,22 @@ table.vgt-table.bordered tr:last-child td {
 }
 
 .modal {
+    .modal-header {
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+    }
     .modal-title {
-        font-weight: bold;
+        font-weight: bold !important;
+    }
+    .modal-body {
+        padding-top: 0.5rem !important;
+        padding-bottom: 0.5rem !important;
+    }
+    .modal-footer{
+        padding: 0.3rem 0.75rem !important;
     }
     label {
-        font-weight: bold;
+        font-weight: bold !important;
     }
 }
 
@@ -56,4 +67,11 @@ table.vgt-table.bordered tr:last-child td {
     .multiselect__tag {
         margin-bottom: 0 !important;
     }
+}
+
+.form-group {
+    margin-bottom: 0.5rem !important;
+}
+label {
+    margin-bottom: 0.25rem !important;
 }
