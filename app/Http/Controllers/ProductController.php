@@ -14,7 +14,7 @@ class ProductController extends Controller
     {
         $products = Product::with(['codes','tags.parent','prices' => function ($query) {
             $query->orderBy('created_at', 'desc');
-        }])->get();
+        }])->orderBy('name')->get();
         return response()->json($products);
     }
 
@@ -34,6 +34,7 @@ class ProductController extends Controller
                 $code->save();
             }
         }
+
         if ($amount = $request->input('price')) {
             $price = new Price();
             $price->amount = $amount;
@@ -76,6 +77,7 @@ class ProductController extends Controller
                 $code->save();
             }
         }
+
         if ($amount = $request->input('price')) {
             $price = new Price();
             $price->amount = $amount;

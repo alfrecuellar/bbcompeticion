@@ -1,3 +1,5 @@
+Vue.component('app', require('./components/App.vue').default);
+
 // Layout Components
 Vue.component('btn', require('./components/layout/Btn.vue').default);
 Vue.component('btn-action', require('./components/layout/BtnAction.vue').default);
@@ -14,3 +16,8 @@ Vue.component('products-index', require('./components/products/Index.vue').defau
 Vue.component('products-form', require('./components/products/Form.vue').default);
 Vue.component('products-show', require('./components/products/Show.vue').default);
 Vue.component('products-button', require('./components/products/Button.vue').default);
+
+
+Vue.component('tags-button', require('./components/tags/Button.vue').default);
+Vue.component('tags-index', require('./components/tags/Index.vue').default);
+Vue.component('tags-form', require('./components/tags/Form.vue').default);

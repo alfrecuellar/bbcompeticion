@@ -29,8 +29,17 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown mr-3">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                <mdi icon="cog-outline" class="font-18"></mdi> Configuración
+                            </a>
+                            <div class="dropdown-menu">
+                                <tags-button type="brand" text="Marcas" icon="bookmark-outline"></tags-button>
+                                <tags-button type="origins" text="Origenes" icon="map-marker-outline"></tags-button>
+                                <tags-button type="providers" text="Poveedores" icon="truck-outline"></tags-button>
+                            </div>
+                        </li>
                         <li class="nav-item active">
                             <products-button></products-button>
                         </li>

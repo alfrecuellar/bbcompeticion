@@ -25,7 +25,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-8" v-if="prices">
+                        <div class="col-8" v-if="prices && prices.length">
                             <div class="form-group">
                                 <label for="price">Precios Anteriores</label>
                                 <select class="form-control">
@@ -37,7 +37,7 @@
                         </div>
                         <div class="col-12 form-group">
                             <label for="code">Código</label>
-                            <vue-multiselect v-model="codes" label="value" track-by="value" :options="codes" @tag="addCodes"
+                            <vue-multiselect v-model="codes" label="value" track-by="id" :options="codes" @tag="addCodes"
                                 :taggable="true" placeholder="Seleccionar" select-label="Agregar" :multiple="true"
                                 deselect-label="Quitar" tag-placeholder="Nuevo" :selected-label="null">
                                 <template slot="noOptions">
@@ -126,10 +126,12 @@
         },
         mounted() {
             bus.$on('products-create', () => {
+                this.clear();
                 this.action = 'create';
                 $(this.$refs.modal).modal('show');
             });
             bus.$on('products-edit', (product) => {
+                this.clear();
                 this.action = 'edit';
                 this.id = product.id;
                 this.name = product.name;
@@ -202,7 +204,7 @@
                 this.name = null;
                 this.price = null;
                 this.prices = null;
-                this.codes = null;
+                this.codes = [],
                 this.brand = null;
                 this.provider = null;
                 this.origin = null;

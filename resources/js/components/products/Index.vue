@@ -9,10 +9,8 @@
                     <template v-if="props.column.field == 'codes'">
                         <span v-for="code in props.row['codes']" class="badge badge-info text-white mx-1">{{ code.value }}</span>
                     </template>
-                    <template v-if="props.column.field == 'prices'">
-                        <template v-if="props.row['prices'] && props.row['prices'].length">
-                            <span class="font-weight-bold">{{ props.row['prices'][0].amount | amount }}</span>
-                        </template>
+                    <template v-if="props.column.field == 'price'">
+                        <span class="font-weight-bold">{{ props.row['price']['amount'] | amount }}</span>
                     </template>
                     <template v-if="props.column.field == 'id'">
                         <btn-group>
@@ -150,14 +148,14 @@
                 });
                 columns.push({
                     label: 'Precio',
-                    field: 'prices',
+                    field: 'price',
                     thClass: 'align-middle',
                     tdClass: 'text-right',
                     html : true,
                     sortable: true,
                     sortFn: (x, y, col, rowX, rowY) => {
-                        let priceX = x[x.length - 1].amount;
-                        let priceY = y[y.length - 1].amount;
+                        let priceX = parseInt(x.amount);
+                        let priceY = parseInt(y.amount);
                         return (priceX < priceY ? -1 : (priceX > priceY ? 1 : 0));
                     }
                 });

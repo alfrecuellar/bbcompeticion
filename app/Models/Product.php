@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $appends = ['origin','brand','provider'];
+    protected $appends = ['origin','brand','provider','price'];
 
     public function codes()
     {
@@ -16,6 +16,11 @@ class Product extends Model
     public function prices()
     {
         return $this->hasMany(Price::class);
+    }
+
+    public function getPriceAttribute()
+    {
+        return $this->prices->count() ? $this->prices->first() : null;
     }
 
     public function tags()
