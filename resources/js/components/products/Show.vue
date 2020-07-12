@@ -10,7 +10,7 @@
                     <div class="font-weight-bold">Precios</div>
                     <ul>
                         <li v-for="(price, index) in product.prices">
-                            <span :class="{'font-weight-bold h4': !index}">{{ price.created_at | longdate }} - {{ price.amount | amount}}</span>
+                            <span :class="{'font-weight-bold h4': !index}">{{ price.amount | amount}}</span> &nbsp; {{ price.created_at | longdate }}
                         </li>
                     </ul>
                     <div class="font-weight-bold">Códigos</div>

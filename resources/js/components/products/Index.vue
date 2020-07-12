@@ -9,7 +9,7 @@
                     <template v-if="props.column.field == 'codes'">
                         <span v-for="code in props.row['codes']" class="badge badge-info text-white mx-1">{{ code.value }}</span>
                     </template>
-                    <template v-if="props.column.field == 'price'">
+                    <template v-if="props.column.field == 'price' && props.row['price']">
                         <span class="font-weight-bold">{{ props.row['price']['amount'] | amount }}</span>
                     </template>
                     <template v-if="props.column.field == 'id'">

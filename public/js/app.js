@@ -79328,7 +79328,7 @@ var render = function() {
                                 })
                               : _vm._e(),
                             _vm._v(" "),
-                            props.column.field == "price"
+                            props.column.field == "price" && props.row["price"]
                               ? [
                                   _c(
                                     "span",
@@ -79408,7 +79408,7 @@ var render = function() {
               ],
               null,
               false,
-              695317184
+              1840916385
             )
           })
         : _vm._e(),
@@ -79480,12 +79480,13 @@ var render = function() {
                   _vm._l(_vm.product.prices, function(price, index) {
                     return _c("li", [
                       _c("span", { class: { "font-weight-bold h4": !index } }, [
-                        _vm._v(
+                        _vm._v(_vm._s(_vm._f("amount")(price.amount)))
+                      ]),
+                      _vm._v(
+                        "   " +
                           _vm._s(_vm._f("longdate")(price.created_at)) +
-                            " - " +
-                            _vm._s(_vm._f("amount")(price.amount))
-                        )
-                      ])
+                          "\n                    "
+                      )
                     ])
                   }),
                   0
@@ -93089,7 +93090,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!***********************************************************************************************!*\
   !*** ./resources/js/components/products/Index.vue?vue&type=template&id=f94d305c&scoped=true& ***!
   \***********************************************************************************************/
-/*! exports provided: render, staticRenderFns */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
