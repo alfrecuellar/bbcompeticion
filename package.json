@@ -26,7 +26,7 @@
     "dependencies": {
         "@mdi/font": "^5.3.45",
         "air-datepicker": "^2.2.3",
-        "moment": "^2.27.0",
+        "moment": "^2.29.2",
         "select2": "^4.0.13",
         "vue-good-table": "^2.19.3",
         "vue-multiselect": "^2.1.6"
