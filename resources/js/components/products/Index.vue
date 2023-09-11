@@ -1,12 +1,21 @@
 <template>
     <div>
-        <vue-good-table v-if="columns.length" :columns="columns" :rows="products" :options="options" styleClass="vgt-table table-hover" :line-numbers="true">
+        <vue-good-table
+            v-if="columns.length"
+            :columns="columns"
+            :rows="products"
+            :options="options"
+            :select-options="selectOptions"
+            @on-selected-rows-change="setSelectedRows"
+            :fixed-header="true"
+            styleClass="vgt-table table-hover"
+            :line-numbers="true">
             <template slot="table-row" slot-scope="props">
                 <template v-if="props.column.html">
                     <template v-if="props.column.field == 'name'">
                         <a href="javascript:;" @click="show(props.row)" class="font-weight-bold">{{ props.row['name'] }}</a>
                     </template>
-                    <template v-if="props.column.field == 'codes'">
+                    <template v-if="props.column.field == 'codes'"><!-- eslint-disable-next-line -->
                         <span v-for="code in props.row['codes']" class="badge badge-info text-white mx-1">{{ code.value }}</span>
                     </template>
                     <template v-if="props.column.field == 'price' && props.row['price']">
@@ -24,44 +33,59 @@
                   {{ props.formattedRow[props.column.field] }}
                 </template>
             </template>
+            <template slot="selected-row-actions">
+                <btn color="outline-primary" icon="currency-usd" @click="showPostpones">Cambiar Precio</btn>
+            </template>
         </vue-good-table>
         <products-form :brands="brands" :providers="providers" :origins="origins"></products-form>
         <products-show></products-show>
+        <products-price
+            :products="selectedRows">
+        </products-price>
     </div>
 </template>
 
 <script>
     export default {
-        data(){
-            return {
-                product: null,
-                brands: [],
-                providers: [],
-                origins: [],
-                products: [],
-                columns: [],
-                loading : false,
-                params: [],
-                options: {
-                    styleClass : 'table',
-                    nextText : 'Siguiente',
-                    prevText : 'Anterior',
-                    rowsPerPageText : 'Productos por Página',
-                    ofText : 'de',
-                    allText : 'Todo',
-                    theme : 'black-rhino'
-                }
-            };
-        },
+        data: () => ({
+            product: null,
+            brands: [],
+            providers: [],
+            origins: [],
+            products: [],
+            selectedRows: [],
+            columns: [],
+            loading : false,
+            params: [],
+            options: {
+                styleClass : 'table',
+                nextText : 'Siguiente',
+                prevText : 'Anterior',
+                rowsPerPageText : 'Productos por Página',
+                ofText : 'de',
+                allText : 'Todo',
+                theme : 'black-rhino'
+            },
+            selectOptions: {
+                enabled: true,
+                selectOnCheckboxOnly: true,
+                selectionInfoClass: '',
+                selectionText: 'productos seleccionados',
+                clearSelectionText: 'x',
+                disableSelectInfo: false,
+                selectAllByGroup: false,
+            },
+        }),
         watch: {
             items(items) {
                 this.setColumns();
                 this.load();
             },
         },
-        mounted: function () {
+        mounted() {
             this.stored();
             this.updated();
+            this.updatedPrice();
 
             this.loadTags();
             this.setColumns();
@@ -92,7 +116,9 @@
                         filterFn: (prices, keyword) => {
                             let matching = false;
                             _.each(prices, (price) => {
-                                if(price.value.toLowerCase().startsWith(keyword.toLowerCase())) {
+                                const priceValue = price.value.toLowerCase();
+                                const keywordValue = keyword.toLowerCase();
+                                if(priceValue.startsWith(keywordValue) || priceValue.endsWith(keywordValue)) {
                                     matching = true;
                                 }
                             });
@@ -101,7 +127,7 @@
                     },
                     sortable: false,
                 });
-                columns.push({
+                /*columns.push({
                     label: 'Origen',
                     field: 'origin.name',
                     thClass: 'align-middle',
@@ -125,7 +151,7 @@
                         });
                         return (tagX < tagY ? -1 : (tagX > tagY ? 1 : 0));
                     }
-                });
+                });*/
                 columns.push({
                     label: 'Marca',
                     field: 'brand.name',
@@ -230,10 +256,23 @@
                     this.updateProducts(product, true);
                 });
             },
+            updatedPrice() {
+                bus.$on('products-updated-price', () => {
+                    this.loadProducts();
+                });
+            },
             stored() {
                 bus.$on('products-stored', (product) => {
                     this.products.push(product);
                 });
+            },
+            setSelectedRows(params) {
+                const selectedRows = params.selectedRows ? params.selectedRows.length : null;
+                this.selectOptions.selectionText = selectedRows === 1 ? 'productos seleccionados' : 'productos seleccionados';
+                this.selectedRows = params.selectedRows;
+            },
+            showPostpones() {
+                bus.$emit('products-price');
             },
         }
     };

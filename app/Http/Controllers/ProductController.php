@@ -109,4 +109,21 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $product->delete();
     }
+
+    public function price(Request $request)
+    {
+        $productIds = $request->input('ids');
+        $percentage = $request->input('percentage');
+        $rounding = $request->input('rounding');
+
+        $products = Product::find($productIds);
+        foreach($products as $product) {
+            $amount = $product->prices->last()->amount;
+            $newAmount = round(((($percentage * $amount) / 100) + $amount), ($rounding * -1));
+            $price = new Price();
+            $price->amount = $newAmount;
+            $price->product_id = $product->id;
+            $price->save();
+        }
+    }
 }

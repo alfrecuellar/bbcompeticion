@@ -15,6 +15,7 @@ Vue.component('well', require('./components/layout/Well.vue').default);
 Vue.component('products-index', require('./components/products/Index.vue').default);
 Vue.component('products-form', require('./components/products/Form.vue').default);
 Vue.component('products-show', require('./components/products/Show.vue').default);
+Vue.component('products-price', require('./components/products/Price.vue').default);
 Vue.component('products-button', require('./components/products/Button.vue').default);
 
 

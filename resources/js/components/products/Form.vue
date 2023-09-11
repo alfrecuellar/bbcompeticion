@@ -21,7 +21,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">$</span>
                                     </div>
-                                    <input type="number" class="form-control" v-model="price">
+                                    <input type="number" class="form-control text-right" v-model="price">
                                 </div>
                             </div>
                         </div>
