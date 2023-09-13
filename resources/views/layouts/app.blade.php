@@ -30,7 +30,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown mr-3">
+                        <li class="nav-item dropdown mr-3" hidden>
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                 <mdi icon="cog-outline" class="font-18"></mdi> Configuración
                             </a>

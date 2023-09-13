@@ -5141,6 +5141,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5226,32 +5229,34 @@ __webpack_require__.r(__webpack_exports__);
         },
         sortable: false
       });
-      /*columns.push({
-          label: 'Origen',
-          field: 'origin.name',
-          thClass: 'align-middle',
-          filterOptions: {
-              enabled: true,
-              placeholder: 'Buscar por Origen',
-          },
-          sortable: true,
-          sortFn: (x, y, col, rowX, rowY) => {
-              let tagX = '';
-              let tagY = '';
-              _.each(rowX.tags, (tag) => {
-                  if(tag.parent.name == 'origin') {
-                      tagX = tag.name
-                  }
-              });
-              _.each(rowY.tags, (tag) => {
-                  if(tag.parent.name == 'origin') {
-                      tagY = tag.name
-                  }
-              });
-              return (tagX < tagY ? -1 : (tagX > tagY ? 1 : 0));
-          }
-      });*/
+      columns.push({
+        label: 'Origen',
+        field: 'origin.name',
+        thClass: 'align-middle',
+        filterOptions: {
+          enabled: true,
+          placeholder: 'Buscar por Origen'
+        },
+        sortable: true,
+        sortFn: function sortFn(x, y, col, rowX, rowY) {
+          var tagX = '';
+          var tagY = '';
 
+          _.each(rowX.tags, function (tag) {
+            if (tag.parent.name == 'origin') {
+              tagX = tag.name;
+            }
+          });
+
+          _.each(rowY.tags, function (tag) {
+            if (tag.parent.name == 'origin') {
+              tagY = tag.name;
+            }
+          });
+
+          return tagX < tagY ? -1 : tagX > tagY ? 1 : 0;
+        }
+      });
       columns.push({
         label: 'Marca',
         field: 'brand.name',
@@ -5270,6 +5275,14 @@ __webpack_require__.r(__webpack_exports__);
           enabled: true,
           placeholder: 'Buscar por Proveedor'
         },
+        sortable: true
+      });
+      columns.push({
+        label: 'Fecha',
+        field: 'price.created_at',
+        thClass: 'align-middle',
+        tdClass: 'text-right',
+        html: true,
         sortable: true
       });
       columns.push({
@@ -79484,6 +79497,21 @@ var render = function() {
                                   })
                                 : _vm._e(),
                               _vm._v(" "),
+                              props.column.field == "price.created_at" &&
+                              props.row["price"]
+                                ? [
+                                    _vm._v(
+                                      "\n                    " +
+                                        _vm._s(
+                                          _vm._f("date")(
+                                            props.row["price"]["created_at"]
+                                          )
+                                        ) +
+                                        "\n                "
+                                    )
+                                  ]
+                                : _vm._e(),
+                              _vm._v(" "),
                               props.column.field == "price" &&
                               props.row["price"]
                                 ? [
@@ -79567,7 +79595,7 @@ var render = function() {
                 ],
                 null,
                 false,
-                1840916385
+                2100889735
               )
             },
             [
@@ -79582,7 +79610,7 @@ var render = function() {
                       attrs: { color: "outline-primary", icon: "currency-usd" },
                       on: { click: _vm.showPostpones }
                     },
-                    [_vm._v("Cambiar Precio")]
+                    [_vm._v("Actualizar Precio")]
                   )
                 ],
                 1

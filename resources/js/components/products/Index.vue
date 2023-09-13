@@ -18,6 +18,9 @@
                     <template v-if="props.column.field == 'codes'"><!-- eslint-disable-next-line -->
                         <span v-for="code in props.row['codes']" class="badge badge-info text-white mx-1">{{ code.value }}</span>
                     </template>
+                    <template v-if="props.column.field == 'price.created_at' && props.row['price']">
+                        {{ props.row['price']['created_at'] | date }}
+                    </template>
                     <template v-if="props.column.field == 'price' && props.row['price']">
                         <span class="font-weight-bold">{{ props.row['price']['amount'] | amount }}</span>
                     </template>
@@ -34,7 +37,7 @@
                 </template>
             </template>
             <template slot="selected-row-actions">
-                <btn color="outline-primary" icon="currency-usd" @click="showPostpones">Cambiar Precio</btn>
+                <btn color="outline-primary" icon="currency-usd" @click="showPostpones">Actualizar Precio</btn>
             </template>
         </vue-good-table>
         <products-form :brands="brands" :providers="providers" :origins="origins"></products-form>
@@ -127,7 +130,7 @@
                     },
                     sortable: false,
                 });
-                /*columns.push({
+                columns.push({
                     label: 'Origen',
                     field: 'origin.name',
                     thClass: 'align-middle',
@@ -151,7 +154,7 @@
                         });
                         return (tagX < tagY ? -1 : (tagX > tagY ? 1 : 0));
                     }
-                });*/
+                });
                 columns.push({
                     label: 'Marca',
                     field: 'brand.name',
@@ -170,6 +173,14 @@
                         enabled: true,
                         placeholder: 'Buscar por Proveedor',
                     },
+                    sortable: true,
+                });
+                columns.push({
+                    label: 'Fecha',
+                    field: 'price.created_at',
+                    thClass: 'align-middle',
+                    tdClass: 'text-right',
+                    html : true,
                     sortable: true,
                 });
                 columns.push({
